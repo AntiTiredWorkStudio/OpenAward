@@ -1,0 +1,5 @@
+F:\OpenAward\OpenAward\bin\Debug\OpenAward.exe
+F:\OpenAward\OpenAward\bin\Debug\OpenAward.pdb
+F:\OpenAward\OpenAward\obj\Debug\OpenAward.csproj.CoreCompileInputs.cache
+F:\OpenAward\OpenAward\obj\Debug\OpenAward.exe
+F:\OpenAward\OpenAward\obj\Debug\OpenAward.pdb
