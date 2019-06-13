@@ -9,26 +9,34 @@ namespace OpenAward
 {
     class Program
     {
-        static int LastRunTime = 0;
-
+        static int StartTime = 0;
         /// <summary>
         /// 线程函数
         /// </summary>
         static void TimeLine()
         {
+            StartTime = TimeStamp;
             while (true)
             {
                 int sleepTime = 1000;
-                if(LastRunTime == 0)
+                if(DayLessTime >= (3600*2 + 1800))
                 {
-                    sleepTime = DayLessTime - 3600 * 2 - 1800;
+                    sleepTime = DayLessTime - (3600 * 2 + 1800);
+                    //Console.WriteLine("sleepTime 0:" + DayLessTime);
                 }
                 else
                 {
-                    sleepTime = DayLessTime + 3600 * 21 + 1800;
+                    sleepTime = DayLessTime + (3600 * 21 + 1800);
+                    //Console.WriteLine("sleepTime not 0:" + sleepTime);
                 }
-                //Console.Write();
-                Console.WriteLine("下次将于"+sleepTime+"秒后执行");
+                if(sleepTime == 0)
+                {
+                    sleepTime = 1;
+                }
+
+
+                Console.WriteLine("现在时间:"+GetTimeFormat(TimeStamp - TimeStamp%86400 + (86400 - DayLessTime)) +",下次将于"+ GetFormateTime(sleepTime)+ "["+ sleepTime + "秒]后执行,预计执行时间:" + GetTimeFormat(TimeStamp + sleepTime));
+
                 Thread.Sleep(sleepTime*1000);
                 DayAction();
             }
@@ -57,6 +65,7 @@ namespace OpenAward
         {
             get
             {
+               // return 9001 - (TimeStamp - StartTime);
                 return 86400 - TimeStamp % 86400;
             }
         }
@@ -71,6 +80,28 @@ namespace OpenAward
                 TimeSpan ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0);
                 return Convert.ToInt32(ts.TotalSeconds);
             }
+        }
+
+        /// <summary>
+        /// 获取格式化时间长度
+        /// </summary>
+        /// <param name="second"></param>
+        /// <returns></returns>
+        public static string GetFormateTime(int second)
+        {
+            
+
+            return ((int)(second / 3600)) + "时" + ((int)((second%3600) / 60)) + "分" + ((int)(second % 60))+"秒";
+            
+        }
+
+        public static string GetTimeFormat(int timeStamp)
+        {
+            DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            long ts = timeStamp;
+            long result = ts * 10000000 + start.Ticks;
+            DateTime target = new DateTime(result);
+            return target.ToShortDateString() +" "+ target.ToShortTimeString();
         }
 
         static void RunWebRequest()

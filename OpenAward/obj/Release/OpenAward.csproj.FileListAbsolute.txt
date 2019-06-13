@@ -3,3 +3,4 @@ F:\OpenAward\OpenAward\bin\Release\OpenAward.pdb
 F:\OpenAward\OpenAward\obj\Release\OpenAward.csproj.CoreCompileInputs.cache
 F:\OpenAward\OpenAward\obj\Release\OpenAward.exe
 F:\OpenAward\OpenAward\obj\Release\OpenAward.pdb
+F:\OpenAward\OpenAward\obj\Release\OpenAward.csprojResolveAssemblyReference.cache
